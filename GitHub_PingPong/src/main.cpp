@@ -350,5 +350,8 @@ void loop() {
   Ausgabe7Seg();
 
   i++;
-  delay(110);
+  if(i % 30 == 0)
+  {
+    Serial.println(millis());
+  }
 }
