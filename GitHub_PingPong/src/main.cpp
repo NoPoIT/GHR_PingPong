@@ -30,7 +30,8 @@ void setup() {
   pinMode(LatchPin, OUTPUT);
   pinMode(ClockPin, OUTPUT);
   
-  
+  //Ausgabe Serieller Monitor
+  Serial.begin(9600);
 }
 
 byte pixel[8][8] =
