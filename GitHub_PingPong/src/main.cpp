@@ -32,6 +32,7 @@ void setup() {
   
   //Ausgabe Serieller Monitor
   Serial.begin(9600);
+  Serial.println("ha");
 }
 
 byte pixel[8][8] =
@@ -351,5 +352,5 @@ void loop() {
 
   i++;
   Serial.println("ha");
-  
+  delay(1000);
 }
