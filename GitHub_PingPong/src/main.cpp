@@ -109,6 +109,36 @@ class BorderPlayer
    }
     
 };
+void PrintGameOver()
+{
+    Anzeige.setIntensity(0, 1);
+        for (byte row = 0; row < 8; row++)
+        {
+          Anzeige.setRow(0, row, B11111111);
+        }
+        delay(1000);
+      
+      Anzeige.setIntensity(0, 8);
+}
+void BlinkFullMatrix()
+{
+  Anzeige.setIntensity(0, 1);
+      for (size_t i = 0; i < 2; i++)
+        {
+          for (byte row = 0; row < 8; row++)
+        {
+          Anzeige.setRow(0, row, B11111111);
+        }
+        delay(100);
+        for (byte row = 0; row < 8; row++)
+        {
+          Anzeige.setRow(0, row, B00000000);
+        }
+        delay(150);
+      }
+      Anzeige.setIntensity(0, 8);
+}
+
 
 int gameovers = 0;
 class Ball
@@ -213,7 +243,8 @@ private:
 
     void GameOver()
     {
-      if (gameovers < 9)
+      gameovers++;
+      if (gameovers <= 9)
       {
         BlinkFullMatrix();
       }
@@ -222,9 +253,6 @@ private:
         PrintGameOver();
         gameovers = 0;
       }
-        
-      
-      
       currentSpalte = 3;
       currentReihe = 3;
       rechtsfliegend = true;
@@ -244,36 +272,9 @@ private:
 
 };
 
-void BlinkFullMatrix()
-{
-  Anzeige.setIntensity(0, 1);
-      for (size_t i = 0; i < 2; i++)
-        {
-          for (byte row = 0; row < 8; row++)
-        {
-          Anzeige.setRow(0, row, B11111111);
-        }
-        delay(100);
-        for (byte row = 0; row < 8; row++)
-        {
-          Anzeige.setRow(0, row, B00000000);
-        }
-        delay(150);
-      }
-      Anzeige.setIntensity(0, 8);
-}
 
-void PrintGameOver()
-{
-    Anzeige.setIntensity(0, 1);
-        for (byte row = 0; row < 8; row++)
-        {
-          Anzeige.setRow(0, row, B11111111);
-        }
-        delay(1000);
-      
-      Anzeige.setIntensity(0, 8);
-}
+
+
 
 
 BorderPlayer border;
