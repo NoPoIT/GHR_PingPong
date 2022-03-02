@@ -350,8 +350,6 @@ void loop() {
   Ausgabe7Seg();
 
   i++;
-  if(i % 30 == 0)
-  {
-    Serial.println(millis());
-  }
+  Serial.println("ha");
+  
 }
