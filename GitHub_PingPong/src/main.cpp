@@ -302,5 +302,5 @@ void loop() {
   //  if(millis() % 220 == 0)
   //    break;
   //}
-  delay(110);
+  delay(210);
 }
