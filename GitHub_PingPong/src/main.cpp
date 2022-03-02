@@ -116,14 +116,14 @@ void PrintGameOver()
         {
           Anzeige.setRow(0, row, B11111111);
         }
-        delay(1000);
+        delay(700);
       
       Anzeige.setIntensity(0, 8);
 }
 void BlinkFullMatrix()
 {
   Anzeige.setIntensity(0, 1);
-      for (size_t i = 0; i < 2; i++)
+      for (size_t i = 0; i < 3; i++)
         {
           for (byte row = 0; row < 8; row++)
         {
@@ -246,10 +246,12 @@ private:
       gameovers++;
       if (gameovers <= 9)
       {
-        BlinkFullMatrix();
+        PrintGameOver();
+        
       }
       else
       {
+        BlinkFullMatrix();
         PrintGameOver();
         gameovers = 0;
       }
