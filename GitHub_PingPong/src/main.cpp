@@ -47,7 +47,7 @@ byte pixel[8][8] =
   {0, 0, 0, 0, 0, 0, 0, 0},  //|7
 };
   
-void Ausgabe()
+void AusgabeMatrix()
 {
   for(byte row = 0; row < 8; row++)
   {
@@ -110,7 +110,7 @@ class BorderPlayer
     
 };
 
-
+int gameovers = 0;
 class Ball
 {
   private:
@@ -213,7 +213,40 @@ private:
 
     void GameOver()
     {
-      Anzeige.setIntensity(0, 1);
+      if (gameovers < 9)
+      {
+        BlinkFullMatrix();
+      }
+      else
+      {
+        PrintGameOver();
+        gameovers = 0;
+      }
+        
+      
+      
+      currentSpalte = 3;
+      currentReihe = 3;
+      rechtsfliegend = true;
+      winkel = 'm';
+      setNewBallOnMatrix();
+      AusgabeMatrix();
+      delay(10);
+    }
+    
+
+
+  public:
+   void setNewBallOnMatrix()
+   {
+      pixel[currentReihe][currentSpalte] = 1;
+   }
+
+};
+
+void BlinkFullMatrix()
+{
+  Anzeige.setIntensity(0, 1);
       for (size_t i = 0; i < 2; i++)
         {
           for (byte row = 0; row < 8; row++)
@@ -228,22 +261,19 @@ private:
         delay(150);
       }
       Anzeige.setIntensity(0, 8);
-      currentSpalte = 3;
-      currentReihe = 3;
-      rechtsfliegend = true;
-      winkel = 'm';
-      setNewBallOnMatrix();
-      Ausgabe();
-      delay(10);
-    }
+}
 
-  public:
-   void setNewBallOnMatrix()
-   {
-      pixel[currentReihe][currentSpalte] = 1;
-   }
-
-};
+void PrintGameOver()
+{
+    Anzeige.setIntensity(0, 1);
+        for (byte row = 0; row < 8; row++)
+        {
+          Anzeige.setRow(0, row, B11111111);
+        }
+        delay(1000);
+      
+      Anzeige.setIntensity(0, 8);
+}
 
 
 BorderPlayer border;
@@ -278,6 +308,26 @@ void ClearMatrix()
       }
 }
 
+int siebseg_Ziffern[10] =
+{
+  B00111111, //0
+  B00000110, //1
+  B01011011, //2
+  B01001111, //3
+  B01100110, //4
+  B01101101, //5
+  B01111101, //6
+  B00000111, //7
+  B01111111, //8
+  B01101111  //9
+};
+void Ausgabe7Seg()
+{
+  digitalWrite(LatchPin, LOW);
+  shiftOut(DataPin, ClockPin, LSBFIRST, siebseg_Ziffern[gameovers]);
+  digitalWrite(LatchPin, HIGH);
+}
+
 int i = 0;
 void loop() {
   ClearMatrix();
@@ -292,15 +342,9 @@ void loop() {
   {
     ball.setNewBallOnMatrix();
   }
-  Ausgabe();
+  AusgabeMatrix();
+  Ausgabe7Seg();
+
   i++;
-
-
-  //ca. 110 sind angenehm zum spielen
-  //while(true)
-  //{
-  //  if(millis() % 220 == 0)
-  //    break;
-  //}
   delay(110);
 }
