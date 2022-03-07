@@ -339,18 +339,17 @@ void loop() {
   Tasterabfrage();
   border.setNewBorderOnMatrix();
 
-  if (i % 5 != 0)
-  {
+  
+  
     ball.BallLogistic(border);
-  }
-  else
-  {
+  
+  
     ball.setNewBallOnMatrix();
-  }
+  
   AusgabeMatrix();
   Ausgabe7Seg();
 
   i++;
   Serial.println("ha");
-  delay(1000);
+  delay(200);
 }
