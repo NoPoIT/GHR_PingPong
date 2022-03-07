@@ -345,5 +345,5 @@ void loop() {
 
   i++;
 
-  delay(1000);
+  delay(110);
 }
