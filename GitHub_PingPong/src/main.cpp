@@ -266,9 +266,6 @@ private:
       delay(10);
     }
     
-
-
-  public:
    void setNewBallOnMatrix()
    {
       pixel[currentReihe][currentSpalte] = 1;
@@ -340,16 +337,13 @@ void loop() {
   border.setNewBorderOnMatrix();
 
   
+  ball.BallLogistic(border);
   
-    ball.BallLogistic(border);
-  
-  
-    ball.setNewBallOnMatrix();
   
   AusgabeMatrix();
   Ausgabe7Seg();
 
   i++;
-  Serial.println("ha");
-  delay(200);
+
+  delay(1000);
 }
