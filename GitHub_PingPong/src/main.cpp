@@ -344,6 +344,6 @@ void loop() {
   Ausgabe7Seg();
 
   i++;
-  Serial.println("Moina");
+  Serial.println("Moin");
   delay(110);
 }
